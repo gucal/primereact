@@ -141,6 +141,7 @@ export const ImageBase = ComponentBase.extend({
         rotateRightIcon: null,
         src: null,
         template: null,
+        content: null,
         useMap: null,
         width: null,
         zoomInIcon: null,

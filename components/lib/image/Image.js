@@ -369,7 +369,7 @@ export const Image = React.memo(
             },
             ptm('image')
         );
-        const image = props.src && <img {...imageProp} alt={alt} />;
+        const image = props.content ? props.content() : props.src && <img {...imageProp} alt={alt} />;
 
         const rootProps = mergeProps(
             {
