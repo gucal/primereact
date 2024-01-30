@@ -1,0 +1,7 @@
+{
+    "main": "./inputgroup.cjs.js",
+    "module": "./inputgroup.esm.js",
+    "unpkg": "./inputgroup.min.js",
+    "types": "./inputgroup.d.ts",
+    "sideEffects": false
+}
