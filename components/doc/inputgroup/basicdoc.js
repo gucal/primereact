@@ -1,5 +1,7 @@
 import { DocSectionCode } from '@/components/doc/common/docsectioncode';
 import { DocSectionText } from '@/components/doc/common/docsectiontext';
+import { InputGroup } from '@/components/lib/inputgroup/InputGroup';
+import { InputGroupAddon } from '@/components/lib/inputgroupaddon/InputGroupAddon';
 import { InputNumber } from '@/components/lib/inputnumber/InputNumber';
 import { InputText } from '@/components/lib/inputtext/InputText';
 
@@ -92,23 +94,23 @@ export default function BasicDemo() {
                 </p>
             </DocSectionText>
             <div className="card flex flex-column md:flex-row gap-3">
-                <div className="p-inputgroup flex-1">
-                    <span className="p-inputgroup-addon">
-                        <i className="pi pi-user"></i>
-                    </span>
+                <InputGroup>
+                    <InputGroupAddon>
+                        <i class="pi pi-user"></i>
+                    </InputGroupAddon>
                     <InputText placeholder="Username" />
-                </div>
+                </InputGroup>
 
-                <div className="p-inputgroup flex-1">
-                    <span className="p-inputgroup-addon">$</span>
+                <InputGroup>
+                    <InputGroupAddon>$</InputGroupAddon>
                     <InputNumber placeholder="Price" />
-                    <span className="p-inputgroup-addon">.00</span>
-                </div>
+                    <InputGroupAddon>.00</InputGroupAddon>
+                </InputGroup>
 
-                <div className="p-inputgroup flex-1">
-                    <span className="p-inputgroup-addon">www</span>
+                <InputGroup>
+                    <InputGroupAddon>www</InputGroupAddon>
                     <InputText placeholder="Website" />
-                </div>
+                </InputGroup>
             </div>
             <DocSectionCode code={code} />
         </>
