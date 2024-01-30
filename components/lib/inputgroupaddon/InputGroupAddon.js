@@ -3,14 +3,13 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/componentbase';
 import { mergeProps } from '../utils/MergeProps';
 import { classNames } from '../utils/Utils';
-import { InputGroupBase } from './InputGroupBase';
+import { InputGroupAddonBase } from './InputGroupAddonBase';
 
-export const InputGroup = React.memo(
+export const InputGroupAddon = React.memo(
     React.forwardRef((inProps, ref) => {
         const context = React.useContext(PrimeReactContext);
-        const props = InputGroupBase.getProps(inProps, context);
-
-        const { ptm, cx, isUnstyled } = InputGroupBase.setMetaData({
+        const props = InputGroupAddonBase.getProps(inProps, context);
+        const { ptm, cx, isUnstyled } = InputGroupAddonBase.setMetaData({
             props,
             ...props.__parentMetadata,
             context: {
@@ -18,7 +17,7 @@ export const InputGroup = React.memo(
             }
         });
 
-        useHandleStyle(InputGroupBase.css.styles, isUnstyled, { name: 'inputgroup', styled: true });
+        useHandleStyle(InputGroupAddonBase.css.styles, isUnstyled, { name: 'inputgroupaddon', styled: true });
 
         const rootProps = mergeProps({
             className: classNames(props.className, cx('root'))
@@ -28,4 +27,4 @@ export const InputGroup = React.memo(
     })
 );
 
-InputGroup.displayName = 'InputGroup';
+InputGroupAddon.displayName = 'InputGroupAddon';
