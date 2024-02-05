@@ -28,7 +28,7 @@ const InputGroupDemo = () => {
         }
     ];
 
-    return <DocComponent title="React InputGroup Component" header="InputGroup" description="Text, icon, buttons and other content can be grouped next to an input." componentDocs={docs} />;
+    return <DocComponent title="React InputGroup Component" header="InputGroup" description="Text, icon, buttons and other content can be grouped next to an input." componentDocs={docs} apiDocs={['InputGroup']} />;
 };
 
 export default InputGroupDemo;
