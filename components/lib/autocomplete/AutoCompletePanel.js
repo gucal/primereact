@@ -78,7 +78,7 @@ export const AutoCompletePanel = React.memo(
                 {
                     index: index,
                     role: 'option',
-                    className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item }),
+                    className: cx('item', { optionGroupLabel: props.optionGroupLabel, suggestion: item, isSelected: props.isSelected(item) }),
                     onClick: (e) => props.onItemClick(e, item),
                     'aria-selected': selected,
                     ...listItemProps
@@ -178,6 +178,7 @@ export const AutoCompletePanel = React.memo(
 
                 const listProps = mergeProps(
                     {
+                        ref: props.listRef,
                         className: cx('list')
                     },
                     _ptm('list')
@@ -221,6 +222,7 @@ export const AutoCompletePanel = React.memo(
                 const items = createItems();
                 const listProps = mergeProps(
                     {
+                        ref: props.listRef,
                         id: props.listId,
                         className: cx('list'),
                         role: 'listbox'
