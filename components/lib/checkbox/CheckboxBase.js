@@ -29,6 +29,7 @@ export const CheckboxBase = ComponentBase.extend({
         invalid: false,
         variant: null,
         name: null,
+        indeterminate: false,
         onChange: null,
         onContextMenu: null,
         onMouseDown: null,

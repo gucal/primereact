@@ -3,6 +3,7 @@ import { PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { CheckIcon } from '../icons/check';
+import { MinusIcon } from '../icons/minus';
 import { Tooltip } from '../tooltip/Tooltip';
 import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { CheckboxBase } from './CheckboxBase';
@@ -25,8 +26,14 @@ export const Checkbox = React.memo(
         const elementRef = React.useRef(null);
         const inputRef = React.useRef(props.inputRef);
 
+        const [indeterminateState, setIndeterminateState] = React.useState(props.indeterminate);
+
+        const updateIndeterminate = (isIndeterminate) => {
+            setIndeterminateState(isIndeterminate);
+        };
+
         const isChecked = () => {
-            return props.checked === props.trueValue;
+            return indeterminateState ? false : props.checked === props.trueValue;
         };
 
         const onChange = (event) => {
@@ -55,6 +62,10 @@ export const Checkbox = React.memo(
                         checked: value
                     }
                 };
+
+                if (indeterminateState) {
+                    updateIndeterminate(false);
+                }
 
                 props?.onChange?.(eventData);
 
@@ -107,7 +118,8 @@ export const Checkbox = React.memo(
                 'data-p-highlight': checked,
                 'data-p-disabled': props.disabled,
                 onContextMenu: props.onContextMenu,
-                onMouseDown: props.onMouseDown
+                onMouseDown: props.onMouseDown,
+                'data-p-indeterminate': indeterminateState || undefined
             },
             otherProps,
             ptm('root')
@@ -129,6 +141,7 @@ export const Checkbox = React.memo(
                     readOnly: props.readOnly,
                     required: props.required,
                     'aria-invalid': props.invalid,
+                    'aria-checked': indeterminateState ? 'mixed' : undefined,
                     checked: checked,
                     ...ariaProps
                 },
@@ -154,7 +167,8 @@ export const Checkbox = React.memo(
                 ptm('box')
             );
 
-            const icon = checked ? props.icon || <CheckIcon {...iconProps} /> : null;
+            const icon = checked ? props.icon || <CheckIcon {...iconProps} /> : indeterminateState ? <MinusIcon {...iconProps} /> : null;
+
             const checkboxIcon = IconUtils.getJSXIcon(icon, { ...iconProps }, { props, checked });
 
             return <div {...boxProps}>{checkboxIcon}</div>;
