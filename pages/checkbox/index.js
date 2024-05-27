@@ -5,6 +5,7 @@ import { DynamicDoc } from '@/components/doc/checkbox/dynamicdoc';
 import { FilledDoc } from '@/components/doc/checkbox/filleddoc';
 import { GroupDoc } from '@/components/doc/checkbox/groupdoc';
 import { ImportDoc } from '@/components/doc/checkbox/importdoc';
+import { IndeterminateDoc } from '@/components/doc/checkbox/indeterminatedoc';
 import { InvalidDoc } from '@/components/doc/checkbox/invaliddoc';
 import { Wireframe } from '@/components/doc/checkbox/pt/wireframe';
 import { StyledDoc } from '@/components/doc/checkbox/theming/styleddoc';
@@ -23,6 +24,11 @@ const CheckboxDemo = () => {
             id: 'basic',
             label: 'Basic',
             component: BasicDoc
+        },
+        {
+            id: 'indeterminate',
+            label: 'Indeterminate',
+            component: IndeterminateDoc
         },
         {
             id: 'group',
