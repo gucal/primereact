@@ -14286,6 +14286,14 @@
                             "description": "Adds a close icon to the header to hide the dialog."
                         },
                         {
+                            "name": "closeButtonProps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "object",
+                            "default": "",
+                            "description": "Used to pass all properties of the ButtonProps to the Button component."
+                        },
+                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
@@ -14444,6 +14452,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Whether the dialog can be displayed full screen."
+                        },
+                        {
+                            "name": "maximizeButtonProps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "object",
+                            "default": "",
+                            "description": "Used to pass all properties of the ButtonProps to the Button component."
                         },
                         {
                             "name": "maximized",
@@ -21729,6 +21745,14 @@
                             "description": "Adds a close icon to the header to hide the dialog."
                         },
                         {
+                            "name": "closeButtonProps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "object",
+                            "default": "",
+                            "description": "Used to pass all properties of the ButtonProps to the Button component."
+                        },
+                        {
                             "name": "closeIcon",
                             "optional": true,
                             "readonly": false,
@@ -21871,6 +21895,14 @@
                             "type": "boolean",
                             "default": "false",
                             "description": "Whether the dialog can be displayed full screen."
+                        },
+                        {
+                            "name": "maximizeButtonProps",
+                            "optional": true,
+                            "readonly": false,
+                            "type": "object",
+                            "default": "",
+                            "description": "Used to pass all properties of the ButtonProps to the Button component."
                         },
                         {
                             "name": "maximized",

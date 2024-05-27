@@ -145,7 +145,7 @@ if (project) {
                                         optional: prop.flags.isOptional,
                                         readonly: prop.flags.isReadonly,
                                         type: prop.type.toString(),
-                                        default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0].text) : '', // TODO: Check
+                                        default: prop.comment && prop.comment.getTag('@defaultValue') ? parseText(prop.comment.getTag('@defaultValue').content[0]?.text || '') : '', // TODO: Check
                                         description: prop.comment && prop.comment.summary.map((s) => parseText(s.text || '')).join(' '),
                                         deprecated: prop.comment && prop.comment.getTag('@deprecated') ? parseText(prop.comment.getTag('@deprecated').content[0].text) : undefined
                                     });

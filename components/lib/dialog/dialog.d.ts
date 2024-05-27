@@ -9,6 +9,7 @@
  */
 import * as React from 'react';
 import { CSSTransitionProps as ReactCSSTransitionProps } from 'react-transition-group/CSSTransition';
+import { ButtonProps } from '../button';
 import { ComponentHooks } from '../componentbase/componentbase';
 import { CSSTransitionProps } from '../csstransition';
 import { PassThroughOptions } from '../passthrough';
@@ -345,6 +346,18 @@ export interface DialogProps {
      * Icon to display in the dialog maximize button when dialog is maximized.
      */
     minimizeIcon?: IconType<DialogProps> | undefined;
+    /**
+     * Used to pass all properties of the ButtonProps to the Button component.
+     * @type {ButtonProps}
+     * @defaultValue { severity: 'secondary', rounded: true, text: true }
+     */
+    closeButtonProps?: object | undefined;
+    /**
+     * Used to pass all properties of the ButtonProps to the Button component.
+     * @type {ButtonProps}
+     * @defaultValue { severity: 'secondary', rounded: true, text: true }
+     */
+    maximizeButtonProps?: object | undefined;
     /**
      * Inline style of the component.
      */
