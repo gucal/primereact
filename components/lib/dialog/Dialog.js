@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { Button } from '../button/Button';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import FocusTrap from '../focustrap/FocusTrap';
@@ -8,7 +9,6 @@ import { TimesIcon } from '../icons/times';
 import { WindowMaximizeIcon } from '../icons/windowmaximize';
 import { WindowMinimizeIcon } from '../icons/windowminimize';
 import { Portal } from '../portal/Portal';
-import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils, classNames } from '../utils/Utils';
 import { DialogBase } from './DialogBase';
 
@@ -19,6 +19,8 @@ export const Dialog = React.forwardRef((inProps, ref) => {
 
     const uniqueId = props.id ? props.id : UniqueComponentId();
     const [idState, setIdState] = React.useState(uniqueId);
+    const [focusableClose, setFocusableClose] = React.useState(null);
+    const [focusableMax, setFocusableMax] = React.useState(null);
     const [maskVisibleState, setMaskVisibleState] = React.useState(false);
     const [visibleState, setVisibleState] = React.useState(false);
     const [maximizedState, setMaximizedState] = React.useState(props.maximized);
@@ -29,6 +31,7 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const headerRef = React.useRef(null);
     const footerRef = React.useRef(null);
     const closeRef = React.useRef(null);
+    const maximizableButtonRef = React.useRef(null);
     const dragging = React.useRef(false);
     const resizing = React.useRef(false);
     const lastPageX = React.useRef(null);
@@ -67,16 +70,39 @@ export const Dialog = React.forwardRef((inProps, ref) => {
     const [bindDocumentDragEndListener, unbindDocumentDragEndListener] = useEventListener({ type: 'mouseup', target: () => window.document, listener: (event) => onDragEnd(event) });
 
     const onClose = (event) => {
+        setFocusableClose(false);
+        setFocusableMax(false);
         props.onHide();
         event.preventDefault();
     };
 
-    const focus = () => {
-        let activeElement = document.activeElement;
-        let isActiveElementInDialog = activeElement && dialogRef.current && dialogRef.current.contains(activeElement);
+    const findFocusableElement = (container) => {
+        return container && container.querySelector('[autofocus]');
+    };
 
-        if (!isActiveElementInDialog && props.closable && props.showHeader && closeRef.current) {
-            closeRef.current.focus();
+    const focus = () => {
+        let focusTarget = findFocusableElement(footerRef.current);
+
+        if (!focusTarget) {
+            focusTarget = findFocusableElement(headerRef.current);
+
+            if (!focusTarget) {
+                focusTarget = findFocusableElement(contentRef.current);
+
+                if (!focusTarget) {
+                    if (props.maximizable) {
+                        setFocusableMax(true);
+                        focusTarget = maximizableButtonRef.current;
+                    } else {
+                        setFocusableClose(true);
+                        focusTarget = closeRef.current;
+                    }
+                }
+            }
+        }
+
+        if (focusTarget) {
+            DomHandler.focus(focusTarget, { focusVisible: true });
         }
     };
 
@@ -446,21 +472,20 @@ export const Dialog = React.forwardRef((inProps, ref) => {
             const closeButtonProps = mergeProps(
                 {
                     ref: closeRef,
-                    type: 'button',
                     className: cx('closeButton'),
                     'aria-label': ariaLabel,
                     onClick: onClose,
-                    onKeyDown: (ev) => ev.stopPropagation()
+                    onKeyDown: (ev) => ev.stopPropagation(),
+                    icon: headerCloseIcon,
+                    autoFocus: focusableClose,
+                    unstyled: isUnstyled(),
+                    'data-pc-group-section': 'headericon'
                 },
+                { ...props.closeButtonProps },
                 ptm('closeButton')
             );
 
-            return (
-                <button {...closeButtonProps}>
-                    {headerCloseIcon}
-                    <Ripple />
-                </button>
-            );
+            return <Button {...closeButtonProps}></Button>;
         }
 
         return null;
@@ -486,19 +511,20 @@ export const Dialog = React.forwardRef((inProps, ref) => {
         if (props.maximizable) {
             const maximizableButtonProps = mergeProps(
                 {
+                    ref: maximizableButtonRef,
                     type: 'button',
                     className: cx('maximizableButton'),
-                    onClick: toggleMaximize
+                    onClick: toggleMaximize,
+                    icon: toggleIcon,
+                    autoFocus: focusableMax,
+                    unstyled: isUnstyled(),
+                    'data-pc-group-section': 'headericon'
                 },
+                { ...props.maximizeButtonProps },
                 ptm('maximizableButton')
             );
 
-            return (
-                <button {...maximizableButtonProps}>
-                    {toggleIcon}
-                    <Ripple />
-                </button>
-            );
+            return <Button {...maximizableButtonProps}></Button>;
         }
 
         return null;

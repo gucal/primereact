@@ -250,6 +250,16 @@ export const DialogBase = ComponentBase.extend({
         __parentMetadata: null,
         appendTo: null,
         ariaCloseIconLabel: null,
+        closeButtonProps: {
+            severity: 'secondary',
+            text: true,
+            rounded: true
+        },
+        maximizeButtonProps: {
+            severity: 'secondary',
+            text: true,
+            rounded: true
+        },
         baseZIndex: 0,
         blockScroll: false,
         breakpoints: null,
