@@ -113,6 +113,11 @@ export interface CheckboxProps extends Omit<React.DetailedHTMLProps<React.InputH
      */
     name?: string | undefined;
     /**
+     * When present, it specifies input state as indeterminate.
+     * @default false
+     */
+    indeterminate?: boolean | undefined;
+    /**
      * Specifies whether a checkbox should be checked or not.
      * @defaultValue false
      */
