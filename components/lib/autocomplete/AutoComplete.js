@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
-import { Chip } from '../chip/chip';
+import { Chip } from '../chip/Chip';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
