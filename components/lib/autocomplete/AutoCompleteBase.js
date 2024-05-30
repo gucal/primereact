@@ -199,6 +199,7 @@ export const AutoCompleteBase = ComponentBase.extend({
         placeholder: null,
         readOnly: false,
         removeTokenIcon: null,
+        chipIcon: null,
         scrollHeight: '200px',
         selectedItemTemplate: null,
         selectionLimit: null,

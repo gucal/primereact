@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
-import { Button } from '../button/Button';
+import { Chip } from '../chip/chip';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -575,7 +575,7 @@ export const AutoComplete = React.memo(
                         },
                         ptm('removeTokenIcon')
                     );
-                    const icon = props.removeTokenIcon || <TimesCircleIcon {...removeTokenIconProps} />;
+                    const icon = props.chipIcon || props.removeTokenIcon || <TimesCircleIcon {...removeTokenIconProps} />;
                     const removeTokenIcon = !props.disabled && IconUtils.getJSXIcon(icon, { ...removeTokenIconProps }, { props });
                     const tokenProps = mergeProps(
                         {
@@ -585,15 +585,18 @@ export const AutoComplete = React.memo(
                     );
                     const tokenLabelProps = mergeProps(
                         {
-                            className: cx('tokenLabel')
+                            className: cx('tokenLabel'),
+                            label: formatValue(val),
+                            removeIcon: removeTokenIcon,
+                            removable: true,
+                            unstyled: isUnstyled()
                         },
                         ptm('tokenLabel')
                     );
 
                     return (
                         <li key={key} {...tokenProps}>
-                            <span {...tokenLabelProps}>{formatValue(val)}</span>
-                            {removeTokenIcon}
+                            <Chip {...tokenLabelProps} />
                         </li>
                     );
                 });
@@ -681,16 +684,9 @@ export const AutoComplete = React.memo(
                 const ariaLabel = props.dropdownAriaLabel || props.placeholder || localeOption('choose');
 
                 return (
-                    <Button
-                        type="button"
-                        icon={props.dropdownIcon || <ChevronDownIcon />}
-                        className={cx('dropdownButton')}
-                        disabled={props.disabled}
-                        onClick={onDropdownClick}
-                        aria-label={ariaLabel}
-                        pt={ptm('dropdownButton')}
-                        __parentMetadata={{ parent: metaData }}
-                    />
+                    <button type="button" className={cx('dropdownButton')} disabled={props.disabled} onClick={onDropdownClick} aria-label={ariaLabel} pt={ptm('dropdownButton')}>
+                        {props.dropdownIcon || <ChevronDownIcon />}
+                    </button>
                 );
             }
 

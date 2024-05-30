@@ -129,6 +129,10 @@ export interface AutoCompletePassThroughOptions {
      */
     removeTokenIcon?: AutoCompletePassThroughType<React.SVGProps<SVGSVGElement> | React.HTMLAttributes<HTMLSpanElement>>;
     /**
+     * Icon to display in chip remove action.
+     */
+    chipIcon?: string | undefined;
+    /**
      * Uses to pass attributes to the input token's DOM element.
      */
     inputToken?: AutoCompletePassThroughType<React.HTMLAttributes<HTMLLIElement>>;
