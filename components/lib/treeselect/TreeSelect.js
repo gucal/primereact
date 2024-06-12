@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { PrimeReactContext, localeOption } from '../api/Api';
+import { Chip } from '../chip/Chip';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -587,11 +588,7 @@ export const TreeSelect = React.memo(
                     <>
                         {selectedNodes &&
                             selectedNodes.map((node, index) => {
-                                return (
-                                    <div {...tokenProps} key={`${node.key}_${index}`}>
-                                        <span {...tokenLabelProps}>{node.label}</span>
-                                    </div>
-                                );
+                                return <Chip {...tokenProps} label={node.label} unstyled={props.unstyled} key={`${node.key}_${index}`}></Chip>;
                             })}
 
                         {isValueEmpty && (props.placeholder || 'empty')}

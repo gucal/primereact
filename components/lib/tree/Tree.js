@@ -3,8 +3,11 @@ import { localeOption, PrimeReactContext } from '../api/Api';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { useUpdateEffect } from '../hooks/useUpdateEffect';
+import { IconField } from '../iconfield/IconField';
 import { SearchIcon } from '../icons/search';
 import { SpinnerIcon } from '../icons/spinner';
+import { InputIcon } from '../inputicon/InputIcon';
+import { InputText } from '../inputtext/InputText';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { TreeBase } from './TreeBase';
 import { UITreeNode } from './UITreeNode';
@@ -535,7 +538,8 @@ export const Tree = React.memo(
 
                 const filterContainerProps = mergeProps(
                     {
-                        className: cx('filterContainer')
+                        className: cx('filterContainer'),
+                        unstyled: props.unstyled
                     },
                     ptm('filterContainer')
                 );
@@ -550,16 +554,17 @@ export const Tree = React.memo(
                         'aria-label': props.filterPlaceholder,
                         onKeyDown: onFilterInputKeyDown,
                         onChange: onFilterInputChange,
-                        disabled: props.disabled
+                        disabled: props.disabled,
+                        unstyled: props.unstyled
                     },
                     ptm('input')
                 );
 
                 let content = (
-                    <div {...filterContainerProps}>
-                        <input {...inputProps} />
-                        {filterIcon}
-                    </div>
+                    <IconField {...filterContainerProps}>
+                        <InputText {...inputProps} />
+                        <InputIcon unstyled={props.unstyled}>{filterIcon}</InputIcon>
+                    </IconField>
                 );
 
                 if (props.filterTemplate) {

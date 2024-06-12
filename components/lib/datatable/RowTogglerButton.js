@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { useMergeProps } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
 import { ChevronRightIcon } from '../icons/chevronright';
-import { Ripple } from '../ripple/Ripple';
 import { IconUtils } from '../utils/Utils';
 
 export const RowTogglerButton = React.memo((props) => {
@@ -52,12 +52,7 @@ export const RowTogglerButton = React.memo((props) => {
         getColumnPTOptions('rowGroupToggler')
     );
 
-    return (
-        <button {...rowGroupTogglerProps}>
-            {togglerIcon}
-            <Ripple />
-        </button>
-    );
+    return <Button {...rowGroupTogglerProps}>{togglerIcon}</Button>;
 });
 
 RowTogglerButton.displayName = 'RowTogglerButton';

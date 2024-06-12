@@ -14,7 +14,6 @@ import { TrashIcon } from '../icons/trash';
 import { InputText } from '../inputtext/InputText';
 import { OverlayService } from '../overlayservice/OverlayService';
 import { Portal } from '../portal/Portal';
-import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, UniqueComponentId, ZIndexUtils } from '../utils/Utils';
 
 export const ColumnFilter = React.memo((props) => {
@@ -570,12 +569,7 @@ export const ColumnFilter = React.memo((props) => {
             })
         );
 
-        return (
-            <button ref={iconRef} {...filterMenuButtonProps}>
-                {columnFilterIcon}
-                <Ripple />
-            </button>
-        );
+        return <Button ref={iconRef} icon={columnFilterIcon} {...filterMenBButtonProps}></Button>;
     };
 
     const createClearButton = () => {
@@ -606,12 +600,7 @@ export const ColumnFilter = React.memo((props) => {
             })
         );
 
-        return (
-            <button {...headerFilterClearButtonProps}>
-                {filterClearIcon}
-                <Ripple />
-            </button>
-        );
+        return <Button icon={filterClearIcon} {...headerFilterClearButtonProps}></Button>;
     };
 
     const createRowItems = () => {

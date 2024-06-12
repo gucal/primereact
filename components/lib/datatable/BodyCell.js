@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ariaLabel } from '../api/Api';
+import { Button } from '../button/Button';
 import { ColumnBase } from '../column/ColumnBase';
 import { useEventListener, useMergeProps, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { BarsIcon } from '../icons/bars';
@@ -9,7 +10,6 @@ import { ChevronRightIcon } from '../icons/chevronright';
 import { PencilIcon } from '../icons/pencil';
 import { TimesIcon } from '../icons/times';
 import { OverlayService } from '../overlayservice/OverlayService';
-import { Ripple } from '../ripple/Ripple';
 import { DomHandler, IconUtils, ObjectUtils, classNames } from '../utils/Utils';
 import { RowCheckbox } from './RowCheckbox';
 import { RowRadioButton } from './RowRadioButton';
@@ -675,12 +675,7 @@ export const BodyCell = React.memo((props) => {
                 getColumnPTOptions('rowToggler')
             );
 
-            content = (
-                <button {...rowTogglerProps}>
-                    {togglerIcon}
-                    <Ripple />
-                </button>
-            );
+            content = <Button {...rowTogglerProps} icon={togglerIcon}></Button>;
 
             if (body) {
                 expanderProps.element = content;
@@ -731,14 +726,8 @@ export const BodyCell = React.memo((props) => {
 
                 content = (
                     <>
-                        <button {...rowEditorSaveButtonProps}>
-                            {rowEditorSaveIcon}
-                            <Ripple />
-                        </button>
-                        <button {...rowEditorCancelButtonProps}>
-                            {rowEditorCancelIcon}
-                            <Ripple />
-                        </button>
+                        <Button icon={rowEditorSaveIcon} {...rowEditorSaveButtonProps}></Button>
+                        <Button {...rowEditorCancelButtonProps} icon={rowEditorCancelIcon}></Button>
                     </>
                 );
             } else {
@@ -761,12 +750,7 @@ export const BodyCell = React.memo((props) => {
                     getColumnPTOptions('rowEditorInitButton')
                 );
 
-                content = (
-                    <button {...rowEditorInitButtonProps}>
-                        {rowEditorInitIcon}
-                        <Ripple />
-                    </button>
-                );
+                content = <Button icon={rowEditorInitIcon} {...rowEditorInitButtonProps}></Button>;
             }
 
             if (body) {
