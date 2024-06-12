@@ -2,8 +2,11 @@ import * as React from 'react';
 import { localeOption, PrimeReactContext } from '../api/Api';
 import { CSSTransition } from '../csstransition/CSSTransition';
 import { useMergeProps } from '../hooks/Hooks';
+import { IconField } from '../iconfield/IconField';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
+import { InputIcon } from '../inputicon/InputIcon';
+import { InputText } from '../inputtext/InputText';
 import { Portal } from '../portal/Portal';
 import { classNames, DomHandler, IconUtils, ObjectUtils } from '../utils/Utils';
 import { VirtualScroller } from '../virtualscroller/VirtualScroller';
@@ -187,7 +190,8 @@ export const DropdownPanel = React.memo(
                 const filterIcon = IconUtils.getJSXIcon(icon, { ...filterIconProps }, { props });
                 const filterContainerProps = mergeProps(
                     {
-                        className: cx('filterContainer', { clearIcon })
+                        className: cx('filterContainer', { clearIcon }),
+                        unstyled: props.unstyled
                     },
                     getPTOptions('filterContainer')
                 );
@@ -200,16 +204,20 @@ export const DropdownPanel = React.memo(
                         placeholder: props.filterPlaceholder,
                         onKeyDown: props.onFilterInputKeyDown,
                         onChange: (e) => onFilterInputChange(e),
-                        value: props.filterValue
+                        value: props.filterValue,
+                        unstyled: props.unstyled,
+                        role: 'searchbox'
                     },
                     getPTOptions('filterInput')
                 );
                 let content = (
-                    <div {...filterContainerProps}>
-                        <input {...filterInputProps} />
-                        {clearIcon}
-                        {filterIcon}
-                    </div>
+                    <IconField {...filterContainerProps}>
+                        <InputText {...filterInputProps} />
+                        <InputIcon unstyled={props.unstyled}>
+                            {clearIcon}
+                            {filterIcon}
+                        </InputIcon>
+                    </IconField>
                 );
 
                 if (props.filterTemplate) {

@@ -2,9 +2,11 @@ import * as React from 'react';
 import { localeOption } from '../api/Api';
 import { Checkbox } from '../checkbox/Checkbox';
 import { useMergeProps } from '../hooks/Hooks';
+import { IconField } from '../iconfield/IconField';
 import { CheckIcon } from '../icons/check';
 import { SearchIcon } from '../icons/search';
 import { TimesIcon } from '../icons/times';
+import { InputIcon } from '../inputicon/InputIcon';
 import { InputText } from '../inputtext/InputText';
 import { Ripple } from '../ripple/Ripple';
 import { IconUtils, ObjectUtils, UniqueComponentId } from '../utils/Utils';
@@ -60,13 +62,14 @@ export const MultiSelectHeader = React.memo((props) => {
         if (props.filter) {
             const filterContainerProps = mergeProps(
                 {
-                    className: cx('filterContainer')
+                    className: cx('filterContainer'),
+                    unstyled: props.unstyled
                 },
                 getPTOptions('filterContainer')
             );
 
             let content = (
-                <div {...filterContainerProps}>
+                <IconField {...filterContainerProps}>
                     <InputText
                         ref={props.filterRef}
                         type="text"
@@ -78,8 +81,8 @@ export const MultiSelectHeader = React.memo((props) => {
                         pt={ptm('filterInput')}
                         __parentMetadata={{ parent: props.metaData }}
                     />
-                    {filterIcon}
-                </div>
+                    <InputIcon unstyled={props.unstyled}>{filterIcon}</InputIcon>
+                </IconField>
             );
 
             if (props.filterTemplate) {

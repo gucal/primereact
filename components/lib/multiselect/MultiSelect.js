@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PrimeReact, { FilterService, PrimeReactContext, localeOption } from '../api/Api';
+import { Chip } from '../chip/Chip';
 import { useHandleStyle } from '../componentbase/ComponentBase';
 import { useMergeProps, useMountEffect, useOverlayListener, useUnmountEffect, useUpdateEffect } from '../hooks/Hooks';
 import { ChevronDownIcon } from '../icons/chevrondown';
@@ -907,7 +908,11 @@ export const MultiSelect = React.memo(
 
                     const tokenProps = mergeProps(
                         {
-                            className: cx('token')
+                            className: cx('token'),
+                            label: label,
+                            removable: true,
+                            removeIcon: icon,
+                            unstyled: props.unstyled
                         },
                         ptm('token', context)
                     );
@@ -919,12 +924,7 @@ export const MultiSelect = React.memo(
                         ptm('tokenLabel', context)
                     );
 
-                    return (
-                        <div {...tokenProps} key={labelKey}>
-                            <span {...tokenLabelProps}>{label}</span>
-                            {icon}
-                        </div>
-                    );
+                    return <Chip {...tokenProps} key={labelKey}></Chip>;
                 });
             }
 
